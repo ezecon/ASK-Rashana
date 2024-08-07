@@ -9,9 +9,7 @@ export default function Home() {
   return (
     <div>
       <HeroSection/>
-        <WhyUs/>
-        <Gallary/>
-        <TopRoutes/>
+
         <Footer/>
     </div>
   )
