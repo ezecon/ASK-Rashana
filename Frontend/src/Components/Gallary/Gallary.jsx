@@ -1,9 +1,12 @@
 import { Carousel } from "@material-tailwind/react";
+import { RiGalleryLine } from "react-icons/ri";
  
 export function Gallary() {
   return (
-   <div>
-    <h1 className="text-2xl font-bold text-center py-7 text-[goldenrod] font-playwrite-gb-s ">Gallary</h1>
+   <div className="my-10">
+    <h1 className="text-2xl text-[goldenrod] font-bold montserrat-alternates-nice py-10  flex justify-center gap-2">
+     Gallery <RiGalleryLine className="text-3xl text-[goldenrod]" />
+      </h1>
      <Carousel loop={true} autoplay={true} className="rounded-xl">
       <img
         src="https://plus.unsplash.com/premium_photo-1664302152991-d013ff125f3f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

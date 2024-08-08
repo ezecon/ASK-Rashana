@@ -13,6 +13,8 @@ import {
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { PiChefHatBold } from "react-icons/pi";
+import { FaOpencart } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
 
 export function NavMenu() {
   const [openNav, setOpenNav] = useState(false);
@@ -32,7 +34,9 @@ export function NavMenu() {
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {/* Navigation items here */}
+
+      <li><AiFillProduct className="text-2xl"/></li>
+      <li><FaOpencart className="text-2xl"/></li>
     </ul>
   );
 
