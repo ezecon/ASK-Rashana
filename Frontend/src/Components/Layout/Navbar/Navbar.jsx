@@ -35,8 +35,8 @@ export function NavMenu() {
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
 
-      <li><AiFillProduct className="text-2xl"/></li>
-      <li><FaOpencart className="text-2xl"/></li>
+     <Link to="products"><li><AiFillProduct className="text-2xl"/></li></Link> 
+     <Link to="carts"> <li><FaOpencart className="text-2xl"/></li></Link>
     </ul>
   );
 
