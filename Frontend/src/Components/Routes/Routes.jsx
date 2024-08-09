@@ -5,6 +5,9 @@ import Admin from "../../Pages/Admin/Admin";
 import Orders from "../../Pages/Admin/Orders";
 import ProductsAdmin from "../../Pages/Admin/Products";
 import { Products } from "../Products/Products";
+import Register from "../../Pages/Register/Register";
+import Login from "../../Pages/Login/Login";
+import Information from "../../Pages/Information/Information";
 
 
 const router = createBrowserRouter([
@@ -36,7 +39,23 @@ const router = createBrowserRouter([
                 element:<Orders/>
             }
         ]
-    },
+    }
+    ,
+    {
+        path: '/register',
+        element: <Register/>
+    }
+    ,
+    {
+        path: '/login',
+        element: <Login/>
+    }
+    ,
+    {
+        path: '/information',
+        element: <Information/>
+    }
+    ,
     {
         path: '*',
         element: <div>404 Not Found</div>
