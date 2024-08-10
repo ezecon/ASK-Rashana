@@ -2,8 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main/Main";
 import Home from "../../Pages/Home/Home";
 import Admin from "../../Pages/Admin/Admin";
-import Orders from "../../Pages/Admin/Orders";
-import ProductsAdmin from "../../Pages/Admin/Products";
 import { Products } from "../Products/Products";
 import Register from "../../Pages/Register/Register";
 import Login from "../../Pages/Login/Login";
@@ -11,6 +9,9 @@ import Information from "../../Pages/Information/Information";
 import Cart from "../Cart/Cart";
 import Profile from "../Profile/Profile";
 import Verify from "../../Pages/Verify/Verify";
+import { ProductsAdmin } from "../../Pages/Admin/Products";
+import { Orders } from "../../Pages/Admin/Orders";
+import CheckItem from "../CheckItem";
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path:'profile',
                 element: <Profile/>
+            },
+            {
+                path:'check-items/:id',
+                element: <CheckItem/>
             },
 
         ]

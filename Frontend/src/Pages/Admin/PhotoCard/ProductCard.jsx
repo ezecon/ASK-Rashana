@@ -1,18 +1,17 @@
-
-import { FaOpencart } from "react-icons/fa";
-import { useToken } from "../Hook/useToken";
+import { IoMdOptions } from "react-icons/io";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useToken } from "../../../Components/Hook/useToken";
+import { Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
 
 export default function ProductCard({ data }) {
   const { _id, image, name, price } = data;
   const { token, removeToken } = useToken();
   const navigate = useNavigate();
   const [userID, setUserID] = useState(null);
-
 
   
   useEffect(() => {
@@ -23,7 +22,7 @@ export default function ProductCard({ data }) {
         return;
       }
       try {
-        const response = await axios.post('http://localhost:3000/api/verifyToken', { token });
+        const response = await axios.post('https://ask-rashana-server.vercel.app/api/verifyToken', { token });
         if (response.status === 200 && response.data.valid) {
           setUserID(response.data.decoded.id);
         } else {
@@ -63,11 +62,6 @@ export default function ProductCard({ data }) {
       toast.error("Something wents wrong!")
     }
   }
-
-  const hangleNavigate = (id)=>{
-    navigate(`check-items/${id}`)
-  }
-
   return (
     <div>
       <div
@@ -76,7 +70,6 @@ export default function ProductCard({ data }) {
       >
         <div className="relative overflow-hidden rounded-xl">
           <img
-             onClick={()=>hangleNavigate(_id)}
             src={image}
             className="rounded-xl object-cover h-48 w-full transition duration-500 ease-in-out transform hover:scale-110"
             alt={name}
@@ -89,9 +82,23 @@ export default function ProductCard({ data }) {
           <p className="montserrat-alternates-nice text-sm text-[goldenrod] mt-1">{price} টাকা</p>
         </div>
         <div className="flex justify-center items-center">
-          <button onClick={handleCart} className=" flex justify-center items-center gap-2 mt-4 bg-[goldenrod] text-white py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out hover:bg-yellow-600 font-playwrite-gb-s">
-          Add to Cart <FaOpencart className="text-xl"/>
-        </button>
+         
+            <Menu>
+                  <MenuHandler>
+                  <button onClick={handleCart} className=" flex justify-center items-center gap-2 mt-4 bg-[goldenrod] text-white py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out hover:bg-yellow-600 font-playwrite-gb-s">
+                  Details <IoMdOptions className="text-xl"/>
+                  </button>
+                  </MenuHandler>
+          <MenuList>
+            <Link to="/profile">
+              <MenuItem>Item</MenuItem>
+            </Link>
+            <Link to="/dashboard">
+              <MenuItem>Update</MenuItem>
+            </Link>
+            <MenuItem>Delete</MenuItem>
+          </MenuList>
+        </Menu>
         </div>
        
       </div>

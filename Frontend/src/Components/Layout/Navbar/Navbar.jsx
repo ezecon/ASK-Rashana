@@ -35,7 +35,7 @@ export function NavMenu() {
         return;
       }
       try {
-        const response = await axios.post('http://localhost:3000/api/verifyToken', { token });
+        const response = await axios.post('https://ask-rashana-server.vercel.app/api/verifyToken', { token });
         if (response.status === 200 && response.data.valid) {
           setUserID(response.data.decoded.id);
         } else {
@@ -56,7 +56,7 @@ export function NavMenu() {
     const fetchUserInfo = async () => {
       if (userID) {
         try {
-          const response = await axios.get(`http://localhost:3000/api/users/${userID}`);
+          const response = await axios.get(`https://ask-rashana-server.vercel.app/api/users/${userID}`);
           if (response.status === 200) {
             setUserInfo(response.data);
           } else {

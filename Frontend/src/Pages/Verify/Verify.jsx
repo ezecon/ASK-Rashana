@@ -18,7 +18,7 @@ export default function Verify() {
         if (verificationCode === code) {
             try {
                 
-                const response = await axios.put('http://localhost:3000/api/users/verify', { email: userEmail });
+                const response = await axios.put('https://ask-rashana-server.vercel.app/api/users/verify', { email: userEmail });
     
                 if (response.data.error) {
                     toast.error(userEmail);
@@ -48,7 +48,7 @@ export default function Verify() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/users/verify/${userEmail}`);
+                const response = await axios.get(`https://ask-rashana-server.vercel.app/api/users/verify/${userEmail}`);
                 if (response.status === 200) {
                     console.log("data fetched");
                     setState(response.data.isVerified);

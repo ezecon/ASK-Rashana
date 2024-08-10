@@ -41,7 +41,7 @@ export default function Login() {
       password: password, 
     };
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', user);
+      const response = await axios.post('https://ask-rashana-server.vercel.app/api/users/login', user);
       
       if (response.data.error) {
         toast.error(response.data.error); // Display error message

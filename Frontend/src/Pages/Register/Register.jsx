@@ -81,7 +81,7 @@ const handleSubmit = async (event) => {
     }; 
   
     try {
-      const response = await axios.post(`http://localhost:3000/api/users/register`, newUser);
+      const response = await axios.post(`https://ask-rashana-server.vercel.app/api/users/register`, newUser);
       
       if (response.data.error) {
         toast.error(response.data.error);

@@ -44,7 +44,7 @@ export default function Cart() {
         return;
       }
       try {
-        const response = await axios.post("http://localhost:3000/api/verifyToken", { token });
+        const response = await axios.post("https://ask-rashana-server.vercel.app/api/verifyToken", { token });
         if (response.status === 200 && response.data.valid) {
           setUserID(response.data.decoded.id);
         } else {
@@ -64,7 +64,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchCarts = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/carts/${userID}`);
+        const res = await axios.get(`https://ask-rashana-server.vercel.app/api/carts/${userID}`);
         if (res.status === 200) {
           setData(res.data);
         }
@@ -81,7 +81,7 @@ export default function Cart() {
 
   const handleSingleDelete = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/api/carts/single/${id}`);
+      const response = await axios.delete(`https://ask-rashana-server.vercel.app/api/carts/single/${id}`);
 
       if (response.status === 200) {
         toast.success("Item Deleted!");
@@ -99,7 +99,7 @@ export default function Cart() {
     if (newAmount < 0.5) return;
 
     try {
-      const response = await axios.put(`http://localhost:3000/api/carts/single/${id}`, {
+      const response = await axios.put(`https://ask-rashana-server.vercel.app/api/carts/single/${id}`, {
         amount: newAmount,
       });
 
@@ -121,7 +121,7 @@ export default function Cart() {
       handleOpen()
     }else if(paymentMethod==="Cash On Delivery"){
       try {
-        const response = await axios.post(`http://localhost:3000/api/order/`,{
+        const response = await axios.post(`https://ask-rashana-server.vercel.app/api/order/`,{
           userId: userID,
           items: data,
           address,
