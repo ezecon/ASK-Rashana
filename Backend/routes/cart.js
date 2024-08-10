@@ -30,5 +30,44 @@ router.get('/:id', async(req, res)=>{
     }
 })
 
+router.put('/single/:id', async (req, res) => {
+    try {
+        const cartId = req.params.id;
+        const { temp: amount } = req.body;
+
+        const updatedCart = await Cart.findByIdAndUpdate(
+            cartId,
+            { amount }, 
+            { new: true } 
+        );
+
+        if (!updatedCart) {
+          return res.status(404).json({ message: 'Item not found' });
+        }
+
+        res.status(200).json({ message: 'Item updated successfully', data: updatedCart });
+    } catch (error) {
+        console.error('Error updating cart item:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+
+router.delete('/single/:id', async (req, res) => {
+    try {
+      const cart = await Cart.findByIdAndDelete(req.params.id);
+  
+      if (!cart) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+  
+      res.status(200).json({ message: "Item deleted successfully" });
+    } catch (err) {
+      res.status(500).json({ message: "Server error" });
+    }
+  });
+  
+
 
 module.exports = router;

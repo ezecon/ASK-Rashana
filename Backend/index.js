@@ -34,6 +34,9 @@ app.use('/api/users',users);
 const carts = require('./routes/cart.js')
 app.use('/api/carts',carts);
 
+const orders = require('./routes/order.js')
+app.use('/api/order',orders);
+
 app.use('/api/users/login', require('./Verification/Auth.js'));
 
 const verify = require('./Verification/verifytoken.js');
