@@ -7,7 +7,7 @@ export default function WhyUs() {
       <h1 className="text-2xl text-[goldenrod] font-bold montserrat-alternates-nice py-4  flex justify-center gap-2">
       <GiForkKnifeSpoon className="text-3xl text-[goldenrod]" /> Why us? <GiForkKnifeSpoon className="text-3xl text-[goldenrod]" />
       </h1>
-      <div className="grid gap-4 montserrat-alternates-extralight my-5 grid-cols-2 ">
+      <div className="grid gap-4 montserrat-alternates-extralight my-5 grid-cols-1 sm:grid-cols-2 ">
         <div className="shadow-lg rounded-lg px-4 py-6 flex flex-col items-center text-center md:text-left md:items-start transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="flex gap-3">
             <h2 className="font-bold text-[goldenrod] mt-2 flex gap-1"><LuBadgeCheck className="text-xl text-[goldenrod]" />Exquisite Taste</h2>

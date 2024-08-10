@@ -42,7 +42,7 @@ export default function Information() {
       formData.append('address', address);
       formData.append('photo', photo); // Ensure photo is a File object
 
-      const response = await axios.put('', formData, {
+      const response = await axios.put('http://localhost:3000/api/users/update', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

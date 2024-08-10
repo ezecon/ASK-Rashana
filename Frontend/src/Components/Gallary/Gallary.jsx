@@ -9,44 +9,21 @@ export function Gallary() {
       </h1>
      <Carousel loop={true} autoplay={true} className="rounded-xl">
       <img
-        src="https://plus.unsplash.com/premium_photo-1664302152991-d013ff125f3f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src="https://upload.wikimedia.org/wikipedia/commons/8/82/%E0%A6%86%E0%A6%AE%E0%A6%A1%E0%A6%BC%E0%A6%BE_%28Hog_Plum%29.jpg"
+        alt="image 1"
+        className="h-full w-full object-cover object-center"
+      />
+      <img
+        src="https://cdn.britannica.com/05/75905-050-C7AE0733/Mangoes-tree.jpg"
+        alt="image 1"
+        className="h-full w-full object-cover object-center"
+      />
+      <img
+        src="https://d2u0ktu8omkpf6.cloudfront.net/d56cf6317775956aa802cf9bc23eb28628b714000aecaf71.jpg"
         alt="image 1"
         className="h-full w-full object-cover object-center"
       />
     
-      <img
-        src="https://images.unsplash.com/photo-1590951360207-317cb18098b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="image 1"
-        className="h-full w-full object-cover object-center"
-      />
-    
-      <img
-        src="https://images.unsplash.com/photo-1565642899687-1c332fb7dc65?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="image 1"
-        className="h-full w-full object-cover object-center"
-      />
-    
-      <img
-        src="https://plus.unsplash.com/premium_photo-1661963542752-9a8a1d72fb28?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="image 1"
-        className="h-full w-full object-cover object-center"
-      />
-    
-      <img
-        src="https://images.unsplash.com/photo-1557223563-8db8e5e7d90b?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="image 1"
-        className="h-full w-full object-cover object-center"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1557223563-8db8e5e7d90b?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="image 1"
-        className="h-full w-full object-cover object-center"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1557223562-6c77ef16210f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="image 1"
-        className="h-full w-full object-cover object-center"
-      />
     
     </Carousel>
    </div>

@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const User = require('../models/User.js');
+const User = require('../models/users.js');
 
 // Login route
 router.post('/', async (req, res) => {
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
         // Generate a JWT token
         const token = jwt.sign(
             { id: user._id, email: user.email },
-            'AllahrBandaEcon', 
+            'DakatPida', 
             { expiresIn: '1h' }
         );
 

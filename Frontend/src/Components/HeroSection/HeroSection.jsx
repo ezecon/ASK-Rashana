@@ -43,9 +43,10 @@ export default function HeroSection() {
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-white font-playwrite-gb-s text-2xl md:text-4xl font-bold">
-            {currentText}
-          </h1>
+        <h1 className="text-white font-playwrite-gb-s text-2xl sm:text-lg md:text-4xl font-bold">
+          {currentText}
+        </h1>
+
         </div>
       </div>
     </div>

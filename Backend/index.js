@@ -28,5 +28,15 @@ db.once('open',()=>{
 const items = require('./routes/product.js')
 app.use('/api/products',items);
 
+const users = require('./routes/user.js')
+app.use('/api/users',users);
+
+const carts = require('./routes/cart.js')
+app.use('/api/carts',carts);
+
+app.use('/api/users/login', require('./Verification/Auth.js'));
+
+const verify = require('./Verification/verifytoken.js');
+app.use('/api/verifyToken', verify);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

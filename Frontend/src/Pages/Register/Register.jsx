@@ -62,7 +62,9 @@ const handleSignUp = (code) => {
   .catch((err) => {
     console.error('Failed to send email. Error:', err);
   });
-    navigate('verify')
+  navigate('/verify', {
+    state: { userEmail: email }
+  });
 
 
 };
@@ -79,13 +81,13 @@ const handleSubmit = async (event) => {
     }; 
   
     try {
-      const response = await axios.post(``, newUser);
+      const response = await axios.post(`http://localhost:3000/api/users/register`, newUser);
       
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
         toast.success("Registration successful!");
-      }
+      } 
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         toast.error(error.response.data.error);

@@ -41,7 +41,7 @@ export default function Login() {
       password: password, 
     };
     try {
-      const response = await axios.post('', user);
+      const response = await axios.post('http://localhost:3000/api/users/login', user);
       
       if (response.data.error) {
         toast.error(response.data.error); // Display error message

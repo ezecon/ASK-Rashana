@@ -9,7 +9,7 @@ router.post('/', (req, res) => {
       return res.status(400).json({ valid: false });
     }
   
-    jwt.verify(token, 'AllahrBandaEcon', (err, decoded) => {
+    jwt.verify(token, 'DakatPida', (err, decoded) => {
       if (err) {
         return res.status(401).json({ valid: false });
       }

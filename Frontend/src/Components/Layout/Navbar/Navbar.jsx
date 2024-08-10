@@ -11,14 +11,67 @@ import {
   MenuList,
   MenuItem,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PiChefHatBold } from "react-icons/pi";
 import { FaOpencart } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
+import { useToken } from "../../Hook/useToken";
+import axios from "axios";
 
 export function NavMenu() {
+  const { token, removeToken } = useToken();
+  const navigate = useNavigate();
+  const [userID, setUserID] = useState(null);
   const [openNav, setOpenNav] = useState(false);
   const [data, setData] = useState(true); // This should be managed based on actual authentication data
+  const [userInfo, setUserInfo] = useState([]); // This should be managed based on actual authentication data
+
+  
+  useEffect(() => {
+    const verifyToken = async () => {
+      if (!token) {
+        removeToken();
+        navigate('/login');
+        return;
+      }
+      try {
+        const response = await axios.post('http://localhost:3000/api/verifyToken', { token });
+        if (response.status === 200 && response.data.valid) {
+          setUserID(response.data.decoded.id);
+        } else {
+          removeToken();
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('Error verifying token:', error);
+        removeToken();
+        navigate('/login');
+      }
+    };
+
+    verifyToken();
+  }, [token, navigate, removeToken]);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (userID) {
+        try {
+          const response = await axios.get(`http://localhost:3000/api/users/${userID}`);
+          if (response.status === 200) {
+            setUserInfo(response.data);
+          } else {
+            console.log(response.data);
+          }
+        } catch (err) {
+          console.error('Error fetching user info:', err);
+        }
+      }
+    };
+
+    if (userID) {
+      fetchUserInfo();
+    }
+  }, [userID]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,7 +97,7 @@ export function NavMenu() {
     <Menu>
       <MenuHandler>
         <Avatar
-          src={'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'}
+          src={userInfo.photo}
           alt="avatar"
           withBorder={true}
           className="p-0.5 border-red-50"
