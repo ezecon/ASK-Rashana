@@ -23,7 +23,7 @@ export default function ProductCard({ data }) {
         return;
       }
       try {
-        const response = await axios.post('http://localhost:3000/api/verifyToken', { token });
+        const response = await axios.post('https://ask-rashana-server.vercel.app/api/verifyToken', { token });
         if (response.status === 200 && response.data.valid) {
           setUserID(response.data.decoded.id);
         } else {
