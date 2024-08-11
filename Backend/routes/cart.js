@@ -54,7 +54,21 @@ router.put('/single/:id', async (req, res) => {
 
 
 
-router.delete('/:userId', async (req, res) => {
+router.delete('/single/:id', async (req, res) => {
+    try {
+      const cart = await Cart.findByIdAndDelete(req.params.id);
+  
+      if (!cart) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+  
+      res.status(200).json({ message: "Item deleted successfully" });
+    } catch (err) {
+      res.status(500).json({ message: "Server error" });
+    }
+  });
+
+  router.delete('/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
 

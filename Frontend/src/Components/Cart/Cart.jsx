@@ -92,6 +92,7 @@ export default function Cart() {
       toast.error("Error while deleting");
     }
   };
+  
   const handleDelete = async () => {
     try {
       const response = await axios.delete(`https://ask-rashana-server.vercel.app/api/carts/${userID}`);
