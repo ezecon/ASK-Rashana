@@ -68,6 +68,11 @@ export function AdminNavbar() {
     verifyToken();
   }, [token, navigate, removeToken]);
 
+  const fetchAdmin = () => {
+    if (userInfo.role !== "Admin") {
+      navigate("/");
+    }
+  };
   useEffect(() => {
     const fetchUserInfo = async () => {
       if (userID) {
@@ -86,6 +91,7 @@ export function AdminNavbar() {
 
     if (userID) {
       fetchUserInfo();
+      fetchAdmin()
     }
   }, [userID]);
 
