@@ -73,7 +73,7 @@ router.delete('/single/:id', async (req, res) => {
         const userId = req.params.userId;
 
         // Attempt to delete the cart item associated with the userId
-        const deletedCart = await Cart.findAndDelete({ userId });
+        const deletedCart = await Cart.deleteMany({ userId });
 
         if (!deletedCart) {
             return res.status(404).json({ message: 'Item not found for this user' });
