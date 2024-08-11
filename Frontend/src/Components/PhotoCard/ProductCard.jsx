@@ -63,6 +63,7 @@ export default function ProductCard({ data }) {
     }
   }
 
+
   const hangleNavigate = (id)=>{
     navigate(`/check-items/${id}`)
   }
@@ -75,7 +76,7 @@ export default function ProductCard({ data }) {
       >
         <div className="relative overflow-hidden rounded-xl">
           <img
-             onClick={()=>hangleNavigate(_id)}
+            onClick={()=>hangleNavigate(_id)}
             src={image}
             className="rounded-xl object-cover h-48 w-full transition duration-500 ease-in-out transform hover:scale-110"
             alt={name}

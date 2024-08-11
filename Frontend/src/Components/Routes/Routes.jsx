@@ -14,6 +14,7 @@ import { Orders } from "../../Pages/Admin/Orders";
 import CheckItem from "../CheckItem";
 import { Dashboard } from "../Dashboard/Dashboard";
 import Developer from "../Developer/Developer";
+import Users from "../Users";
 
 
 const router = createBrowserRouter([
@@ -73,6 +74,15 @@ const router = createBrowserRouter([
                 path: 'developer',
                 element: <Developer/>
             }
+            ,
+            {
+                path: 'check-user/:id',
+                element: <Users/>
+            },
+            {
+                path:'check-items/:id',
+                element: <CheckItem/>
+            },
         ]
     }
     ,

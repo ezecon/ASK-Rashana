@@ -37,7 +37,7 @@ const CheckItem = () => {
   return (
     <div className="montserrat-alternates-nice flex flex-col md:flex-row bg-background p-6 rounded-lg shadow-lg">
       <div className="flex-1 flex items-center justify-center">
-        <img src={data.image} alt="Gray Running Sneakers" className="object-cover rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-105" />
+        <img src={data.image} alt={data.name} className="object-cover rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-105" />
       </div>
       <div className="flex-1 p-6">
         <h2 className={`${sharedClasses.textPrimary} text-[goldenrod] text-2xl font-bold`}>{data.name}</h2>

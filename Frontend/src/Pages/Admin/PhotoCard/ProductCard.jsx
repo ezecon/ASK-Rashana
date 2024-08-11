@@ -9,57 +9,26 @@ import { Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react"
 
 export default function ProductCard({ data }) {
   const { _id, image, name, price } = data;
-  const { token, removeToken } = useToken();
   const navigate = useNavigate();
-  const [userID, setUserID] = useState(null);
-
-  
-  useEffect(() => {
-    const verifyToken = async () => {
-      if (!token) {
-        removeToken();
-        navigate('/login');
-        return;
-      }
-      try {
-        const response = await axios.post('https://ask-rashana-server.vercel.app/api/verifyToken', { token });
-        if (response.status === 200 && response.data.valid) {
-          setUserID(response.data.decoded.id);
-        } else {
-          removeToken();
-          navigate('/login');
-        }
-      } catch (error) {
-        console.error('Error verifying token:', error);
-        removeToken();
-        navigate('/login');
-      }
-    };
-
-    verifyToken();
-  }, [token, navigate, removeToken]);
 
 
 
-  const handleCart=async()=>{
+  const hangleNavigate = (id)=>{
+    navigate(`check-items/${id}`)
+  }
+
+  const handleDelete = async (id)=>{
     try{
-      const response = await axios.post( `https://ask-rashana-server.vercel.app/api/carts`,{
-        name: name,
-        productId: _id,
-        image: image,
-        price: price,
-        userId: userID
-      })
-      if(response.status===200){
-        toast.success("Added to Cart!")
+      const res = await axios.delete(`http://localhost:3000/api/products/${id}`);
+      if(res.status===200){
+        toast.success("Product Deleted")
       }
       else{
-        toast.error("Something wents wrong!")
+        toast.error("Something wents wrong")
       }
 
-    }catch(error){
-      console.log(error)
-      toast.error("Something wents wrong!")
+    }catch(err){
+      console.log(err)
     }
   }
   return (
@@ -70,6 +39,7 @@ export default function ProductCard({ data }) {
       >
         <div className="relative overflow-hidden rounded-xl">
           <img
+          onClick={()=>hangleNavigate(_id)}
             src={image}
             className="rounded-xl object-cover h-48 w-full transition duration-500 ease-in-out transform hover:scale-110"
             alt={name}
@@ -85,18 +55,15 @@ export default function ProductCard({ data }) {
          
             <Menu>
                   <MenuHandler>
-                  <button onClick={handleCart} className=" flex justify-center items-center gap-2 mt-4 bg-[goldenrod] text-white py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out hover:bg-yellow-600 font-playwrite-gb-s">
+                  <button className=" flex justify-center items-center gap-2 mt-4 bg-[goldenrod] text-white py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out hover:bg-yellow-600 font-playwrite-gb-s">
                   Details <IoMdOptions className="text-xl"/>
                   </button>
                   </MenuHandler>
           <MenuList>
-            <Link to="/profile">
-              <MenuItem>Item</MenuItem>
-            </Link>
             <Link to="/dashboard">
               <MenuItem>Update</MenuItem>
             </Link>
-            <MenuItem>Delete</MenuItem>
+            <MenuItem onClick={()=>handleDelete(_id)}>Delete</MenuItem>
           </MenuList>
         </Menu>
         </div>

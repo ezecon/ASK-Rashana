@@ -69,7 +69,7 @@ export function Orders() {
         {data.map((order) => (
           <div key={order._id} className="mb-10 border-b-2 border-[goldenrod]">
             <h2 className="text-xl font-semibold mb-2">Order ID: {order._id}</h2>
-            <button className=" border rounded-lg bg-[goldenrod] text-white px-2">User</button>
+            <a href={`check-user/${order.userId}`}><button className=" border rounded-lg bg-[goldenrod] text-white px-2">User</button></a>
             <p className="text-sm text-gray-700">Total: ${order.total}</p>
             <p className="text-sm text-gray-700">Address: {order.address}</p>
             <p className="text-sm text-gray-700">Status: {order.status}</p>
