@@ -54,7 +54,7 @@ router.put('/single/:id', async (req, res) => {
 
 
 
-router.delete('/single/:userId', async (req, res) => {
+router.delete('/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
 

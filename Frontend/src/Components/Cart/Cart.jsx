@@ -92,6 +92,18 @@ export default function Cart() {
       toast.error("Error while deleting");
     }
   };
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`https://ask-rashana-server.vercel.app/api/carts/${userID}`);
+
+      if (response.status === 200) {
+        toast.success("Item Deleted!");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Error while deleting");
+    }
+  };
 
   const handleCount = async (id, currentAmount, change) => {
     const newAmount = currentAmount + change;
@@ -148,6 +160,7 @@ export default function Cart() {
     else{
       toast.error("Select Payment Method")
     }
+    handleDelete()
   };
 
   return (
