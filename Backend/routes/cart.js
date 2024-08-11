@@ -78,7 +78,7 @@ router.delete('/single/:id', async (req, res) => {
         if (!deletedCart) {
             return res.status(404).json({ message: 'Item not found for this user' });
         }
-
+   
         res.status(200).json({ message: 'Item deleted successfully' });
     } catch (error) {
         console.error('Error deleting cart item:', error);
