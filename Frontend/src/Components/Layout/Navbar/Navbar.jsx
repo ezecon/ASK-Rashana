@@ -23,29 +23,21 @@ export function NavMenu() {
   const navigate = useNavigate();
   const [userID, setUserID] = useState(null);
   const [openNav, setOpenNav] = useState(false);
-  const [data, setData] = useState(true); // This should be managed based on actual authentication data
   const [userInfo, setUserInfo] = useState([]); // This should be managed based on actual authentication data
 
   
   useEffect(() => {
     const verifyToken = async () => {
-      if (!token) {
-        removeToken();
-        navigate('/login');
-        return;
-      }
       try {
         const response = await axios.post('https://ask-rashana-server.vercel.app/api/verifyToken', { token });
         if (response.status === 200 && response.data.valid) {
           setUserID(response.data.decoded.id);
         } else {
           removeToken();
-          navigate('/login');
         }
       } catch (error) {
         console.error('Error verifying token:', error);
         removeToken();
-        navigate('/login');
       }
     };
 
@@ -93,7 +85,7 @@ export function NavMenu() {
     </ul>
   );
 
-  const profile = data ? (
+  const profile = userInfo ? (
     <Menu>
       <MenuHandler>
         <Avatar
@@ -106,7 +98,7 @@ export function NavMenu() {
       <MenuList>
         <Link to="/profile"><MenuItem>Profile</MenuItem></Link>
         <Link to="/dashboard"><MenuItem>Dashboard</MenuItem></Link>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={removeToken}>Logout</MenuItem>
       </MenuList>
     </Menu>
   ) : (

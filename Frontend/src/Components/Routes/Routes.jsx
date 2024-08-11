@@ -12,6 +12,7 @@ import Verify from "../../Pages/Verify/Verify";
 import { ProductsAdmin } from "../../Pages/Admin/Products";
 import { Orders } from "../../Pages/Admin/Orders";
 import CheckItem from "../CheckItem";
+import { Dashboard } from "../Dashboard/Dashboard";
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path:'profile',
                 element: <Profile/>
+            },
+            {
+                path:'dashboard',
+                element: <Dashboard/>
             },
             {
                 path:'check-items/:id',

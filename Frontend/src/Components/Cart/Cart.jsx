@@ -77,7 +77,7 @@ export default function Cart() {
     }
   }, [userID]);
 
-  const totalPrice = data.reduce((total, item) => total + item.price, 0);
+  const totalPrice = data.reduce((total, item) => total + item.price*item.amount, 0);
 
   const handleSingleDelete = async (id) => {
     try {
@@ -96,24 +96,32 @@ export default function Cart() {
   const handleCount = async (id, currentAmount, change) => {
     const newAmount = currentAmount + change;
 
+    // Ensure the new amount does not fall below 0.5
     if (newAmount < 0.5) return;
 
     try {
-      const response = await axios.put(`https://ask-rashana-server.vercel.app/api/carts/single/${id}`, {
-        amount: newAmount,
-      });
+        console.log(`Updating item with ID: ${id} to amount: ${newAmount}`);
+        const response = await axios.put(`https://ask-rashana-server.vercel.app/api/carts/single/${id}`, {
+            amount: newAmount,
+        });
 
-      if (response.status === 200) {
-        setData(data.map(item => 
-          item._id === id ? { ...item, amount: newAmount } : item
-        ));
-        toast.success("Item count updated");
-      }
+        if (response.status === 200) {
+            setData(prevData => 
+                prevData.map(item => 
+                    item._id === id ? { ...item, amount: newAmount } : item
+                )
+            );
+            toast.success("Item count updated");
+        } else {
+            console.error(`Failed to update item. Status code: ${response.status}`);
+            toast.error("Failed to update item count");
+        }
     } catch (err) {
-      console.log(err);
-      toast.error("Error while updating");
+        console.error('Error while updating item:', err);
+        toast.error("Error while updating");
     }
-  };
+};
+
 
   const handleOrder = async () => {
     if(paymentMethod==="Bkash"){
@@ -159,7 +167,7 @@ export default function Cart() {
                     Product Name: <span className="text-black">{item.name}</span>
                   </p>
                   <p className="text-md text-gray-600">
-                    Price: <span className="font-medium text-black">BDT {item.price}</span>
+                    Price: <span className="font-medium text-black">BDT {item.price*item.amount}</span>
                   </p>
                   <p className="border border-[goldenrod] text-[goldenrod] rounded flex justify-center gap-1 text-xs sm:text-sm md:text-base w-full sm:w-2/3 md:w-1/3 lg:w-1/4">
                     <CiSquarePlus

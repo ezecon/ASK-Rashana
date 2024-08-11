@@ -49,7 +49,8 @@ export default function ProductCard({ data }) {
         productId: _id,
         image: image,
         price: price,
-        userId: userID
+        userId: userID,
+        amount:1
       })
       if(response.status===200){
         toast.success("Added to Cart!")

@@ -18,17 +18,17 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PiChefHatBold } from "react-icons/pi";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { AiFillProduct } from "react-icons/ai";
 import { MdBorderColor } from "react-icons/md";
 import axios from "axios"; // Import axios if not already imported
 import { toast } from "react-hot-toast"; // Assuming you use react-hot-toast for notifications
+import { useToken } from "../../../Components/Hook/useToken";
 
 export function AdminNavbar() {
   const [openNav, setOpenNav] = useState(false);
-  const [data, setData] = useState(true); // This should be managed based on actual authentication data
   const [open, setOpen] = useState(false);
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -37,6 +37,57 @@ export function AdminNavbar() {
   const [file, setFile] = useState(null); // To store the selected file
 
   const handleOpen = () => setOpen(!open);
+  const { token, removeToken } = useToken();
+  const navigate = useNavigate();
+  const [userID, setUserID] = useState(null);
+  const [userInfo, setUserInfo] = useState([]); // This should be managed based on actual authentication data
+
+  
+  useEffect(() => {
+    const verifyToken = async () => {
+      if (!token) {
+        removeToken();
+        navigate('/login');
+        return;
+      }
+      try {
+        const response = await axios.post('https://ask-rashana-server.vercel.app/api/verifyToken', { token });
+        if (response.status === 200 && response.data.valid) {
+          setUserID(response.data.decoded.id);
+        } else {
+          removeToken();
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('Error verifying token:', error);
+        removeToken();
+        navigate('/login');
+      }
+    };
+
+    verifyToken();
+  }, [token, navigate, removeToken]);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (userID) {
+        try {
+          const response = await axios.get(`https://ask-rashana-server.vercel.app/api/users/${userID}`);
+          if (response.status === 200) {
+            setUserInfo(response.data);
+          } else {
+            console.log(response.data);
+          }
+        } catch (err) {
+          console.error('Error fetching user info:', err);
+        }
+      }
+    };
+
+    if (userID) {
+      fetchUserInfo();
+    }
+  }, [userID]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -74,12 +125,12 @@ export function AdminNavbar() {
     </ul>
   );
 
-  const profile = data ? (
+  const profile = userInfo ? (
     <Menu>
       <MenuHandler>
         <Avatar
           src={
-            "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
+            userInfo.photo
           }
           alt="avatar"
           withBorder={true}
@@ -87,13 +138,10 @@ export function AdminNavbar() {
         />
       </MenuHandler>
       <MenuList>
-        <Link to="/profile">
+        <Link to="/admin/profile">
           <MenuItem>Profile</MenuItem>
         </Link>
-        <Link to="/dashboard">
-          <MenuItem>Dashboard</MenuItem>
-        </Link>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={removeToken}>Logout</MenuItem>
       </MenuList>
     </Menu>
   ) : (
