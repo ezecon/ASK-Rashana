@@ -2,15 +2,11 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const Item = require('../models/products.js');
-
-// Multer setup
-
 const cloudinary = require('../Cloudinary.js');
 
-
+// Multer setup
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-
 
 // Create an item
 router.post('/', upload.single('file'), async (req, res) => {
@@ -44,18 +40,11 @@ router.post('/', upload.single('file'), async (req, res) => {
     }
 });
 
-
-// Get items
+// Get all items
 router.get('/', async (req, res) => {
-
-
     try {
-        const item = await Item.find();
-        if (item) {
-            res.status(200).json(item);
-        } else {
-            res.status(404).json({ message: 'Item not found' });
-        }
+        const items = await Item.find();
+        res.status(200).json(items);
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
     }
@@ -64,7 +53,6 @@ router.get('/', async (req, res) => {
 // Get item by ID
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-
     try {
         const item = await Item.findById(id);
         if (item) {
@@ -76,20 +64,57 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ message: 'Server error', error });
     }
 });
-router.delete('/:id', async(req,res)=>{
-    try{
-        const id = req.params.id
-        const deleteProd = await Item.findByIdAndDelete(id)
 
-        if(!deleteProd){
-            res.status(404).json({message: "product not found"})
+// Update an item by ID
+router.put('/:id', upload.single('file'), async (req, res) => {
+    const { id } = req.params;
+    const { name, description, price, category } = req.body;
+    let updatedFields = { name, description, price, category };
+
+    try {
+        if (req.file) {
+            const result = await new Promise((resolve, reject) => {
+                cloudinary.uploader.upload_stream({ resource_type: 'image' }, (error, result) => {
+                    if (error) {
+                        console.error("Cloudinary Upload Error: ", error);
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+                }).end(req.file.buffer);
+            });
+
+            updatedFields.image = result.secure_url;
         }
-        res.status(200).json({message: "product deleted"})
-    }catch(err){
-        console.log(err)
-        res.status(500).json({message: "server error"})
-    }
-})
 
+        const updatedItem = await Item.findByIdAndUpdate(id, updatedFields, { new: true });
+
+        if (!updatedItem) {
+            return res.status(404).json({ message: 'Item not found' });
+        }
+
+        res.status(200).json(updatedItem);
+    } catch (error) {
+        console.error("Server Error: ", error);
+        res.status(500).json({ message: 'Server error', error });
+    }
+});
+
+// Delete an item by ID
+router.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deleteProd = await Item.findByIdAndDelete(id);
+
+        if (!deleteProd) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        res.status(200).json({ message: 'Product deleted' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 module.exports = router;
