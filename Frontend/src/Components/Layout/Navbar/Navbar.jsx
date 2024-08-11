@@ -52,7 +52,6 @@ export function NavMenu() {
           const response = await axios.get(`https://ask-rashana-server.vercel.app/api/users/${userID}`);
           if (response.status === 200) {
             setUserInfo(response.data);
-            console.log(userInfo.role)
           } else {
             console.log(response.data);
           }
