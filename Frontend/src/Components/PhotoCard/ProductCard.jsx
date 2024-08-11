@@ -17,23 +17,18 @@ export default function ProductCard({ data }) {
   
   useEffect(() => {
     const verifyToken = async () => {
-      if (!token) {
-        removeToken();
-        navigate('/login');
-        return;
-      }
+
       try {
         const response = await axios.post('https://ask-rashana-server.vercel.app/api/verifyToken', { token });
         if (response.status === 200 && response.data.valid) {
           setUserID(response.data.decoded.id);
         } else {
           removeToken();
-          navigate('/login');
+  
         }
       } catch (error) {
         console.error('Error verifying token:', error);
         removeToken();
-        navigate('/login');
       }
     };
 
@@ -43,6 +38,9 @@ export default function ProductCard({ data }) {
 
 
   const handleCart=async()=>{
+    if(!token){
+      toast.error("Login First")
+    }
     try{
       const response = await axios.post( `https://ask-rashana-server.vercel.app/api/carts`,{
         name: name,
@@ -66,7 +64,7 @@ export default function ProductCard({ data }) {
   }
 
   const hangleNavigate = (id)=>{
-    navigate(`check-items/${id}`)
+    navigate(`/check-items/${id}`)
   }
 
   return (

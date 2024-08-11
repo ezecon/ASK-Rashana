@@ -21,13 +21,14 @@ import axios from "axios";
 export function NavMenu() {
   const { token, removeToken } = useToken();
   const navigate = useNavigate();
-  const [userID, setUserID] = useState(null);
+  const [userID, setUserID] = useState([]);
   const [openNav, setOpenNav] = useState(false);
   const [userInfo, setUserInfo] = useState([]); // This should be managed based on actual authentication data
 
   
   useEffect(() => {
     const verifyToken = async () => {
+
       try {
         const response = await axios.post('https://ask-rashana-server.vercel.app/api/verifyToken', { token });
         if (response.status === 200 && response.data.valid) {
@@ -85,7 +86,7 @@ export function NavMenu() {
     </ul>
   );
 
-  const profile = userInfo ? (
+  const profile = userInfo && userInfo.photo ? (
     <Menu>
       <MenuHandler>
         <Avatar

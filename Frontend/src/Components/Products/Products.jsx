@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { MdInventory2 } from "react-icons/md";
 import ProductCard from "../PhotoCard/ProductCard";
 import PacmanLoader from "react-spinners/PacmanLoader";
+import { Link } from "react-router-dom";
 
 export function Products({isHome}) {
   const [data, setData] = useState([]);
@@ -67,7 +68,7 @@ export function Products({isHome}) {
   
         </div>
         <div className="flex justify-center mt-10">
-             <Button>See More</Button>
+             <Link to="/products"><Button>See More</Button></Link>
         </div>
         </div>
       }

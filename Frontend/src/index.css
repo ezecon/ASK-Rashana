@@ -23,3 +23,205 @@
     font-weight: 600;
     font-style: normal;
   }
+  .animated img {    
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);    
+    animation: border-transform 10s linear infinite alternate forwards;    
+    border-radius: 100%;
+  }
+  
+  @keyframes border-transform {    
+    0%, 100% {        
+      border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;    
+    }    
+    14% {        
+      border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%;    
+    }    
+    28% {        
+      border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%;    
+    }    
+    42% {        
+      border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%;    
+    }    
+    56% {        
+      border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%;    
+    }    
+    70% {        
+      border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%;    
+    }    
+    84% {        
+      border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%;    
+    }
+  }
+  
+  
+  /* Adjusted .cta styles for responsiveness */
+.cta {
+	display: inline-block;
+	padding: 10px 24px; /* Increased padding for better touchability */
+	color: white;
+	background-color: goldenrod;
+	border: 2px solid goldenrod;
+	font-size: 1.5rem; /* Adjusted font size for smaller screens */
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+	margin-top: 20px; /* Reduced margin-top for better alignment */
+	transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .cta:hover {
+	color: goldenrod;
+	background-color: transparent;
+  }
+  
+  /* Adjusted overlay to cover entire section */
+  #hero::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0.7;
+	z-index: -1;
+  }
+  
+  /* Adjusted .hero container for responsive content */
+  #hero .hero {
+	max-width: 100%; /* Full width on smaller screens */
+	margin: 0 auto;
+	padding: 0 20px; /* Reduced padding for smaller screens */
+	justify-content: flex-start;
+  }
+  
+  /* Adjusted text sizes for responsiveness */
+  #hero h1 {
+	display: block;
+	width: fit-content;
+	font-size: 3rem; /* Adjusted base font size */
+	position: relative;
+	color: transparent;
+	animation: text_reveal 0.5s ease forwards;
+	animation-delay: 1s;
+  }
+  
+  #hero h1:nth-child(1) {
+	animation-delay: 1s;
+  }
+  
+  #hero h1:nth-child(2) {
+	animation-delay: 2s;
+  }
+  
+  #hero h1:nth-child(3) {
+	animation: text_reveal_name 0.5s ease forwards;
+	animation-delay: 3s;
+  }
+  
+  #hero h1 span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0;
+	background-color: goldenrod;
+	animation: text_reveal_box 1s ease;
+	animation-delay: 0.5s;
+  }
+  
+  #hero h1:nth-child(1) span {
+	animation-delay: 0.5s;
+  }
+  
+  #hero h1:nth-child(2) span {
+	animation-delay: 1.5s;
+  }
+  
+  #hero h1:nth-child(3) span {
+	animation-delay: 2.5s;
+  }
+  
+  /* End Keyframes */
+  @keyframes text_reveal_box {
+	50% {
+	  width: 100%;
+	  left: 0;
+	}
+	100% {
+	  width: 0;
+	  left: 100%;
+	}
+  }
+  
+  @keyframes text_reveal {
+	100% {
+	  color: rgb(124, 123, 119);
+	}
+  }
+  
+  @keyframes text_reveal_name {
+	100% {
+	  color: goldenrod;
+	}
+  }
+
+  #btn-button118 {
+    --bg-color: 
+#191f36;
+    --snd-bg-color: 
+#262b40;
+    --text-color: 
+#fff;
+    --mian-color: 
+#59b2f4;
+  }
+
+  #btn-button118.btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background: var(--mian-color);
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem var(--mian-color);
+    font-size: 1.6rem;
+    color: var(--bg-color);
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+    transition: 0.5s ease;
+  }
+  
+  #btn-button118.btn:hover {
+    box-shadow: none;
+  }
+  
+  #btn-button118 span {
+    color: var(--text-color);
+  }#btn-button118 {
+    --bg-color: 
+#191f36;
+    --snd-bg-color: 
+#262b40;
+    --text-color: 
+#fff;
+    --mian-color: 
+#59b2f4;
+  }
+
+  #btn-button118.btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background: var(--mian-color);
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem var(--mian-color);
+    font-size: 1.6rem;
+    color: var(--bg-color);
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+    transition: 0.5s ease;
+  }
+  
+  #btn-button118.btn:hover {
+    box-shadow: none;
+  }
+  
+  #btn-button118 span {
+    color: var(--text-color);
+  }

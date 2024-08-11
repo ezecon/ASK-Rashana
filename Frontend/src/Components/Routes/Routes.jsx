@@ -13,6 +13,7 @@ import { ProductsAdmin } from "../../Pages/Admin/Products";
 import { Orders } from "../../Pages/Admin/Orders";
 import CheckItem from "../CheckItem";
 import { Dashboard } from "../Dashboard/Dashboard";
+import Developer from "../Developer/Developer";
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
                 path:'check-items/:id',
                 element: <CheckItem/>
             },
+            {
+                path: '/developer',
+                element: <Developer/>
+            }
 
         ]
     },
@@ -63,6 +68,11 @@ const router = createBrowserRouter([
                 path:'profile',
                 element:<Profile/>
             }
+            ,
+            {
+                path: 'developer',
+                element: <Developer/>
+            }
         ]
     }
     ,
@@ -80,6 +90,7 @@ const router = createBrowserRouter([
         path: 'verify/information',
         element: <Information/>
     }
+
     ,
     {
         path: '/verify',
